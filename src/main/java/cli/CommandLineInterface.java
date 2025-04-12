@@ -35,35 +35,38 @@ public class CommandLineInterface {
             case "hello":
                 System.out.println("Hello 2!");
                 break;
-            case "choose files":
+            case "choose file":
                 running = false;
                 SwingUtilities.invokeLater(() -> {
-                    chooseFiles();
-                    running = true;
-                    SwingUtilities.invokeLater(this::mainMenu);
-                });
-                break;
-            case "choose output directory":
-                running = false;
-                SwingUtilities.invokeLater(() -> {
-                    chooseOutputDirectory();
+                    chooseFile();
                     running = true;
                     SwingUtilities.invokeLater(this::mainMenu);
                 });
                 break;
             case "analyze":
-                analyzeFiles();
+                running = false;
+                SwingUtilities.invokeLater(() -> {
+                    chooseOutputDirectory();
+                    analyzeFiles();
+                    running = true;
+                    SwingUtilities.invokeLater(this::mainMenu);
+                });
                 break;
             default:
-                System.out.println("Unknown command. Available commands: hello, choose files, choose output directory, analyze");
+                System.out.println("Unknown command. Available commands: hello, choose file, analyze");
                 break;
         }
     }
 
-    private void chooseFiles() {
+    private void chooseFile() {
         FileSelector fileSelector = new FileSelector();
-        inputFiles = fileSelector.selectFiles();
-        System.out.println("Files selected: " + inputFiles.size());
+        ExcelFile file = fileSelector.selectFile();
+        if (file != null) {
+            inputFiles.add(file);
+            System.out.println("File selected: " + file.getName());
+        } else {
+            System.out.println("File selection cancelled.");
+        }
     }
 
     private void chooseOutputDirectory() {
@@ -78,11 +81,11 @@ public class CommandLineInterface {
 
     private void analyzeFiles() {
         if (inputFiles.isEmpty()) {
-            System.out.println("No input files selected. Use 'choose files' command first.");
+            System.out.println("No input files selected. Use 'choose file' command first.");
             return;
         }
         if (outputDirectory == null) {
-            System.out.println("No output directory selected. Use 'choose output directory' command first.");
+            System.out.println("No output directory selected. Use 'analyze' command to select output directory.");
             return;
         }
 
@@ -102,6 +105,8 @@ public class CommandLineInterface {
         });
     }
 }
+
+
 
 
 
