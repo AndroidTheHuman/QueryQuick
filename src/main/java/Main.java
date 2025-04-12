@@ -4,7 +4,8 @@ public class Main {
     public static void main (String [] args)
 
     {
-        CommandLineInterface commandLineInterface = new CommandLineInterface();
+        CommandLineInterface cli = new CommandLineInterface();
+        cli.startUp();
 
     }
 }
