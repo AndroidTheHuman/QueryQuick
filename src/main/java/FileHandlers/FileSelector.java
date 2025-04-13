@@ -22,8 +22,8 @@ public class FileSelector {
         ExcelFile excelFile = null;
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            System.out.print("Enter start row for " + file.getName() + ": ");
-            int startRow = scanner.nextInt();
+            System.out.print("Enter start row for " + file.getName() + " (Excel row number, e.g., 1 for first row): ");
+            int startRow = scanner.nextInt() - 1; // Convert to zero-based index
             scanner.nextLine(); // Consume newline
 
             System.out.print("Enter column coordinates to query (comma-separated, e.g., A,B,AA): ");
@@ -41,6 +41,7 @@ public class FileSelector {
         return excelFile;
     }
 }
+
 
 
 
