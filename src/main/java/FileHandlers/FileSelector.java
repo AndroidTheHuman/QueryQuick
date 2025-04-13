@@ -4,6 +4,8 @@ import File.ExcelFile;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FileSelector {
@@ -22,19 +24,25 @@ public class FileSelector {
             File file = fileChooser.getSelectedFile();
             System.out.print("Enter start row for " + file.getName() + ": ");
             int startRow = scanner.nextInt();
-            System.out.print("Enter start column for " + file.getName() + ": ");
-            int startColumn = scanner.nextInt();
-            System.out.print("Enter end column for " + file.getName() + ": ");
-            int endColumn = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
-            excelFile = new ExcelFile(file.getAbsolutePath(), startRow, startColumn, endColumn);
+            System.out.print("Enter column coordinates to query (comma-separated, e.g., A,B,AA): ");
+            String columnsInput = scanner.nextLine();
+            String[] columnsArray = columnsInput.split(",");
+            List<Integer> columns = new ArrayList<>();
+            for (String column : columnsArray) {
+                columns.add(ExcelColumnConverter.columnToIndex(column.trim().toUpperCase()));
+            }
+
+            excelFile = new ExcelFile(file.getAbsolutePath(), startRow, columns);
         }
 
         frame.dispose();
         return excelFile;
     }
 }
+
+
 
 
 

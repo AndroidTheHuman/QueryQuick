@@ -1,17 +1,16 @@
 package File;
 
 import java.io.File;
+import java.util.List;
 
 public class ExcelFile extends File {
     private int startRow;
-    private int startColumn;
-    private int endColumn;
+    private List<Integer> columns;
 
-    public ExcelFile(String pathname, int startRow, int startColumn, int endColumn) {
+    public ExcelFile(String pathname, int startRow, List<Integer> columns) {
         super(pathname);
         this.startRow = startRow;
-        this.startColumn = startColumn;
-        this.endColumn = endColumn;
+        this.columns = columns;
     }
 
     public int getStartRow() {
@@ -22,21 +21,14 @@ public class ExcelFile extends File {
         this.startRow = startRow;
     }
 
-    public int getStartColumn() {
-        return startColumn;
+    public List<Integer> getColumns() {
+        return columns;
     }
 
-    public void setStartColumn(int startColumn) {
-        this.startColumn = startColumn;
-    }
-
-    public int getEndColumn() {
-        return endColumn;
-    }
-
-    public void setEndColumn(int endColumn) {
-        this.endColumn = endColumn;
+    public void setColumns(List<Integer> columns) {
+        this.columns = columns;
     }
 }
+
 
 

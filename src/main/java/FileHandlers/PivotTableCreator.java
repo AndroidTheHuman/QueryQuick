@@ -28,8 +28,8 @@ public class PivotTableCreator {
             if (row != null) {
                 Row pivotRow = pivotSheet.createRow(rowIndex++);
                 int pivotColumnIndex = 0;
-                for (int j = file.getStartColumn(); j <= file.getEndColumn(); j++) {
-                    Cell cell = row.getCell(j);
+                for (int column : file.getColumns()) {
+                    Cell cell = row.getCell(column);
                     if (cell != null) {
                         String cellKey = cell.getRowIndex() + "-" + cell.getColumnIndex();
                         if (mergedRegions.containsKey(cellKey)) {
@@ -38,7 +38,7 @@ public class PivotTableCreator {
                             Cell pivotCell = pivotRow.createCell(pivotColumnIndex++);
                             copyCellValue(mergedCell, pivotCell);
                             // Skip the rest of the merged cells
-                            j += mergedRegion.getNumberOfCells() - 1;
+                            column += mergedRegion.getNumberOfCells() - 1;
                         } else {
                             Cell pivotCell = pivotRow.createCell(pivotColumnIndex++);
                             copyCellValue(cell, pivotCell);
@@ -90,6 +90,7 @@ public class PivotTableCreator {
         }
     }
 }
+
 
 
 
