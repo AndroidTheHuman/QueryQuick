@@ -19,7 +19,6 @@ public class PivotTableCreator {
         Workbook pivotWorkbook = new XSSFWorkbook();
         Sheet pivotSheet = pivotWorkbook.createSheet("Pivot Table");
 
-        // Cache merged regions to reduce redundant checks
         Map<String, CellRangeAddress> mergedRegions = cacheMergedRegions(sheet);
 
         int rowIndex = 0;
@@ -37,7 +36,6 @@ public class PivotTableCreator {
                             Cell mergedCell = sheet.getRow(mergedRegion.getFirstRow()).getCell(mergedRegion.getFirstColumn());
                             Cell pivotCell = pivotRow.createCell(pivotColumnIndex++);
                             copyCellValue(mergedCell, pivotCell);
-                            // Skip the rest of the merged cells
                             column += mergedRegion.getNumberOfCells() - 1;
                         } else {
                             Cell pivotCell = pivotRow.createCell(pivotColumnIndex++);
@@ -73,7 +71,6 @@ public class PivotTableCreator {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     String dateStr = dateFormat.format(sourceCell.getDateCellValue());
                     targetCell.setCellValue(dateStr);
-                    System.out.println("Date cell value copied as string: " + dateStr);
                 } else {
                     targetCell.setCellValue(sourceCell.getNumericCellValue());
                 }
