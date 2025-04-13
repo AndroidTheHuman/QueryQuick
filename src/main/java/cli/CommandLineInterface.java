@@ -89,12 +89,14 @@ public class CommandLineInterface {
             return;
         }
 
+        System.out.println("Starting analysis...");
         ExcelFileHandler excelFileHandler = new ExcelFileHandler();
         try {
             excelFileHandler.writeResultsToFile(inputFiles, outputDirectory);
             System.out.println("Analysis complete. Results saved to: " + outputDirectory.getAbsolutePath());
         } catch (IOException e) {
             System.out.println("An error occurred during analysis: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -105,6 +107,7 @@ public class CommandLineInterface {
         });
     }
 }
+
 
 
 
