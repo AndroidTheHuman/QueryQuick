@@ -19,7 +19,7 @@ public class CommandLineInterface {
     private boolean running = true;
 
     public void startUp() {
-        System.out.println("Welcome to the Excel File Analyzer!");
+        System.out.println("Welcome to QueryQuick, the Excel file table querier & merger!");
         System.out.println("Type 'help' for a list of available commands.");
         mainMenu();
     }
@@ -45,7 +45,7 @@ public class CommandLineInterface {
                     SwingUtilities.invokeLater(this::mainMenu);
                 });
                 break;
-            case "analyze":
+            case "query":
                 running = false;
                 SwingUtilities.invokeLater(() -> {
                     chooseOutputDirectory();
@@ -61,6 +61,9 @@ public class CommandLineInterface {
             case "help":
                 printHelp();
                 break;
+            case "about":
+                printAbout();
+                break;
             case "exit":
                 running = false;
                 System.out.println("Exiting...");
@@ -75,10 +78,23 @@ public class CommandLineInterface {
         System.out.println("Available commands:");
         System.out.println("  hello         - Greet the system.");
         System.out.println("  choose file   - Select an input Excel file.");
-        System.out.println("  analyze       - Analyze the selected files and save results.");
+        System.out.println("  query       - Query the selected files and save results.");
         System.out.println("  list files    - Show the list of selected files and their order.");
+        System.out.println("  about         - Display a summary of the software.");
         System.out.println("  help          - Display this help message.");
         System.out.println("  exit          - Exit the application.");
+    }
+
+    private void printAbout() {
+        System.out.println("QueryQuick");
+        System.out.println("Version 1.0");
+        System.out.println("This software allows you to select multiple Excel files, specify columns to query, and generate a merged pivot table.");
+        System.out.println("Features:");
+        System.out.println("  - Select multiple Excel files and specify columns to query.");
+        System.out.println("  - Generate pivot tables from the specified columns.");
+        System.out.println("  - Merge pivot tables from multiple files.");
+        System.out.println("  - Save the results to a specified output directory with a custom file name.");
+        System.out.println("Developed for a school project");
     }
 
     private void chooseFile() {
@@ -113,15 +129,15 @@ public class CommandLineInterface {
             return;
         }
         if (outputDirectory == null) {
-            System.out.println("No output directory selected. Use 'analyze' command to select output directory.");
+            System.out.println("No output directory selected. Use 'query' command to select output directory.");
             return;
         }
         if (outputFileName == null || outputFileName.trim().isEmpty()) {
-            System.out.println("No output file name provided. Use 'analyze' command to provide output file name.");
+            System.out.println("No output file name provided. Use 'query' command to provide output file name.");
             return;
         }
 
-        System.out.println("Starting analysis...");
+        System.out.println("Starting query...");
         ExcelFileHandler excelFileHandler = new ExcelFileHandler();
         try {
             excelFileHandler.writeResultsToFile(inputFiles, outputDirectory, outputFileName);
@@ -151,6 +167,7 @@ public class CommandLineInterface {
         });
     }
 }
+
 
 
 

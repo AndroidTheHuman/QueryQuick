@@ -6,7 +6,7 @@ public class ExcelColumnConverter {
         for (int i = 0; i < column.length(); i++) {
             index = index * 26 + (column.charAt(i) - 'A' + 1);
         }
-        return index - 1; // Convert to zero-based index
+        return index - 1; // A correspondeert met 1 maar ik heb A = 0 nodig
     }
 }
 
