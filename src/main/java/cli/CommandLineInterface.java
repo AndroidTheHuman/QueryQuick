@@ -80,8 +80,8 @@ public class CommandLineInterface {
         System.out.println("  choose file   - Select an input Excel file.");
         System.out.println("  query       - Query the selected files and save results.");
         System.out.println("  list files    - Show the list of selected files and their order.");
-        System.out.println("  about         - Display a summary of the software.");
-        System.out.println("  help          - Display this help message.");
+        System.out.println("  about         - Gives a summary of this software program.");
+        System.out.println("  help          - Displays this help message.");
         System.out.println("  exit          - Exit the application.");
     }
 
