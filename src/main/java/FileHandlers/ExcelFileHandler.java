@@ -12,11 +12,13 @@ public class ExcelFileHandler {
     private PivotTableCreator pivotTableCreator = new PivotTableCreator();
 
     public void writeResultsToFile(List<ExcelFile> files, File outputDir) throws IOException {
+        System.out.println("Writing results to file...");
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Results");
 
         int rowIndex = 0;
         for (ExcelFile file : files) {
+            System.out.println("Processing file: " + file.getName());
             Workbook pivotWorkbook = pivotTableCreator.createPivotTable(file);
             Sheet pivotSheet = pivotWorkbook.getSheetAt(0);
 
@@ -46,12 +48,15 @@ public class ExcelFileHandler {
             }
         }
 
-        File outputFile = new File(outputDir, "resultss.xlsx");
+        File outputFile = new File(outputDir, "results3.xlsx");
+        System.out.println("Saving results to: " + outputFile.getAbsolutePath());
         FileOutputStream outputStream = new FileOutputStream(outputFile);
         workbook.write(outputStream);
         workbook.close();
+        System.out.println("File saved successfully.");
     }
 }
+
 
 
 
