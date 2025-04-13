@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelFileHandler {
     private PivotTableCreator pivotTableCreator = new PivotTableCreator();
 
-    public void writeResultsToFile(List<ExcelFile> files, File outputDir) throws IOException {
+    public void writeResultsToFile(List<ExcelFile> files, File outputDir, String outputFileName) throws IOException {
         System.out.println("Writing results to file...");
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Results");
@@ -48,7 +48,7 @@ public class ExcelFileHandler {
             }
         }
 
-        File outputFile = new File(outputDir, "results3.xlsx");
+        File outputFile = new File(outputDir, outputFileName + ".xlsx");
         System.out.println("Saving results to: " + outputFile.getAbsolutePath());
         FileOutputStream outputStream = new FileOutputStream(outputFile);
         workbook.write(outputStream);
@@ -56,6 +56,8 @@ public class ExcelFileHandler {
         System.out.println("File saved successfully.");
     }
 }
+
+
 
 
 
